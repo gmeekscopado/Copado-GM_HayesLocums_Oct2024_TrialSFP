@@ -9,7 +9,7 @@ public class TestDeploymentClass {
             acc.Name = newName;
             acc.Phone = newPhone;
         }
-        
+        //TESTING
         // Perform the update
         update accounts;
     }
