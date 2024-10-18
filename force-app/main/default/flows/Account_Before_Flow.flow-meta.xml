@@ -2,9 +2,22 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>61.0</apiVersion>
     <assignments>
+        <name>Is_Competitor</name>
+        <label>Is Competitor</label>
+        <locationX>50</locationX>
+        <locationY>863</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.AccountSource</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Advertisement</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Set_Default_Company_Website</name>
         <label>Set Default Company Website</label>
-        <locationX>50</locationX>
+        <locationX>182</locationX>
         <locationY>647</locationY>
         <assignmentItems>
             <assignToReference>$Record.Website</assignToReference>
@@ -13,11 +26,14 @@
                 <stringValue>www.tesHLSite.com.test.invalid</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Type_Analyst</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Set_Description</name>
         <label>Set Description</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>431</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
@@ -33,7 +49,7 @@
     <decisions>
         <name>Has_Website</name>
         <label>Has Website?</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>539</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -55,7 +71,7 @@
     <decisions>
         <name>Is_description_equal_to_now</name>
         <label>Is description equal to now?</label>
-        <locationX>336</locationX>
+        <locationX>545</locationX>
         <locationY>323</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -74,7 +90,30 @@
             <label>No - Update to Now</label>
         </rules>
     </decisions>
-    <description>Website logic</description>
+    <decisions>
+        <description>I am a good dev I add notes lol</description>
+        <name>Is_Type_Analyst</name>
+        <label>Is Type Analyst?</label>
+        <locationX>182</locationX>
+        <locationY>755</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Is_Analyst</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Competitor</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Is_Competitor</targetReference>
+            </connector>
+            <label>Yes - Is Analyst</label>
+        </rules>
+    </decisions>
+    <description>Competitor logic</description>
     <environments>Default</environments>
     <interviewLabel>Account - Before Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Account - Before Flow</label>
@@ -98,7 +137,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>210</locationX>
+        <locationX>419</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_description_equal_to_now</targetReference>
