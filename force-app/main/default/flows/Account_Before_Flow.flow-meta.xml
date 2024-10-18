@@ -2,9 +2,22 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>61.0</apiVersion>
     <assignments>
+        <name>Set_Default_Company_Website</name>
+        <label>Set Default Company Website</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Website</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>www.tesHLSite.com.test.invalid</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Set_Description</name>
         <label>Set Description</label>
-        <locationX>50</locationX>
+        <locationX>182</locationX>
         <locationY>431</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
@@ -13,11 +26,36 @@
                 <elementReference>$Flow.CurrentDateTime</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Has_Website</targetReference>
+        </connector>
     </assignments>
+    <decisions>
+        <name>Has_Website</name>
+        <label>Has Website?</label>
+        <locationX>182</locationX>
+        <locationY>539</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Does_Not_Have_Website</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Website</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Default_Company_Website</targetReference>
+            </connector>
+            <label>No - Does Not Have Website</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Is_description_equal_to_now</name>
         <label>Is description equal to now?</label>
-        <locationX>182</locationX>
+        <locationX>336</locationX>
         <locationY>323</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -36,6 +74,7 @@
             <label>No - Update to Now</label>
         </rules>
     </decisions>
+    <description>Website logic</description>
     <environments>Default</environments>
     <interviewLabel>Account - Before Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Account - Before Flow</label>
@@ -59,7 +98,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>56</locationX>
+        <locationX>210</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_description_equal_to_now</targetReference>
