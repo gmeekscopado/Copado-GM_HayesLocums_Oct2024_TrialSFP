@@ -13,6 +13,9 @@
                 <stringValue>Advertisement</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Update_Contact</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Set_Default_Company_Website</name>
@@ -33,7 +36,7 @@
     <assignments>
         <name>Set_Description</name>
         <label>Set Description</label>
-        <locationX>336</locationX>
+        <locationX>380</locationX>
         <locationY>431</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
@@ -49,7 +52,7 @@
     <decisions>
         <name>Has_Website</name>
         <label>Has Website?</label>
-        <locationX>336</locationX>
+        <locationX>380</locationX>
         <locationY>539</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -71,7 +74,7 @@
     <decisions>
         <name>Is_description_equal_to_now</name>
         <label>Is description equal to now?</label>
-        <locationX>545</locationX>
+        <locationX>611</locationX>
         <locationY>323</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -113,7 +116,7 @@
             <label>Yes - Is Analyst</label>
         </rules>
     </decisions>
-    <description>Competitor logic</description>
+    <description>Competitor logic Update contact</description>
     <environments>Default</environments>
     <interviewLabel>Account - Before Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Account - Before Flow</label>
@@ -136,8 +139,21 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Contact</name>
+        <label>Update Contact</label>
+        <locationX>50</locationX>
+        <locationY>971</locationY>
+        <inputAssignments>
+            <field>Department</field>
+            <value>
+                <stringValue>Other</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Contacts</inputReference>
+    </recordUpdates>
     <start>
-        <locationX>419</locationX>
+        <locationX>485</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_description_equal_to_now</targetReference>
