@@ -33,7 +33,7 @@
     <assignments>
         <name>Set_Description</name>
         <label>Set Description</label>
-        <locationX>336</locationX>
+        <locationX>424</locationX>
         <locationY>431</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
@@ -43,14 +43,17 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Has_Website</targetReference>
+            <targetReference>Has_Website_Dev_1</targetReference>
         </connector>
     </assignments>
     <decisions>
-        <name>Has_Website</name>
-        <label>Has Website?</label>
-        <locationX>336</locationX>
+        <name>Has_Website_Dev_1</name>
+        <label>Has Website Dev 1</label>
+        <locationX>424</locationX>
         <locationY>539</locationY>
+        <defaultConnector>
+            <targetReference>Is_Name_filled</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>No_Does_Not_Have_Website</name>
@@ -71,7 +74,7 @@
     <decisions>
         <name>Is_description_equal_to_now</name>
         <label>Is description equal to now?</label>
-        <locationX>545</locationX>
+        <locationX>677</locationX>
         <locationY>323</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -88,6 +91,25 @@
                 <targetReference>Set_Description</targetReference>
             </connector>
             <label>No - Update to Now</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Name_filled</name>
+        <label>Is Name filled?</label>
+        <locationX>666</locationX>
+        <locationY>647</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Name_filled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Name</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Yes - Name filled</label>
         </rules>
     </decisions>
     <decisions>
@@ -137,7 +159,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>419</locationX>
+        <locationX>551</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_description_equal_to_now</targetReference>
